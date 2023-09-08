@@ -1,3 +1,22 @@
+let urlParams = new URLSearchParams(window.location.search);
+let userId = urlParams.get("userId");
+if (userId == null || userId == '') {
+	userId = localStorage.getItem('userId')
+	if (userId == null || userId == '') {
+		document.getElementById('createUser').value = true
+	}
+	else {
+	window.location.href = '/?userId='+userId
+	}
+	}
+
+if (userId != null && userId != '') {
+	localStorage.setItem('userId', userId)
+	document.getElementById('userId').value = userId
+}
+
+
+
     let marsApiButtons = document.querySelectorAll("button[id*='marsApi']")
     marsApiButtons.forEach( button => button.addEventListener('click', function () {
     									const buttonId = this.id
@@ -7,13 +26,14 @@
     									document.getElementById('frmRoverType').submit()
     								  }))
 
-    let urlParams = new URLSearchParams(window.location.search);
-    let roverType = urlParams.get("marsApiRoverData")
-    let marsSol = urlParams.get("marsSol")
-    if (marsSol == null){
-    marsSol = 1
-    }
+    //let marsRoverType = document.getElementById('marsApiRoverData').value
+    let roverType = document.getElementById('marsApiRoverData').value
+    let marsSol =  document.getElementById("marsSol").value
+    if (marsSol != null){
+    //marsSol = 1
     document.getElementById("marsSol").value = marsSol
+    }
+
 
     for (let i = 0;i<marsApiButtons.length;i++){
         if (roverType == null){

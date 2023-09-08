@@ -1,9 +1,11 @@
 package com.codecampus.dto;
 
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestParam;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "mars_api_preferences")
 public class HomeDto {
+    private Long userId;
     private String marsApiRoverData;
     private Integer marsSol;
     private Boolean cameraFhaz;
@@ -15,9 +17,17 @@ public class HomeDto {
     private Boolean cameraNavcam;
     private Boolean cameraPancam;
     private Boolean cameraMinites;
+    private Boolean rememberPreferences;
 
-    private Boolean defaultCheck1;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Long getUserId() {
+        return userId;
+    }
 
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+    @Column(length = 20)
     public String getMarsApiRoverData() {
         return marsApiRoverData;
     }
@@ -34,12 +44,12 @@ public class HomeDto {
         this.marsSol = marsSol;
     }
 
-    public Boolean getDefaultCheck1() {
-        return defaultCheck1;
+    public Boolean getRememberPreferences() {
+        return rememberPreferences;
     }
 
-    public void setDefaultCheck1(Boolean defaultCheck1) {
-        this.defaultCheck1 = defaultCheck1;
+    public void setRememberPreferences(Boolean rememberPreferences) {
+        this.rememberPreferences = rememberPreferences;
     }
 
     public Boolean getCameraFhaz() {
@@ -112,5 +122,24 @@ public class HomeDto {
 
     public void setCameraMinites(Boolean cameraMinites) {
         this.cameraMinites = cameraMinites;
+    }
+
+    @Override
+    public String toString() {
+        return "HomeDto{" +
+                "userId=" + userId +
+                ", marsApiRoverData='" + marsApiRoverData + '\'' +
+                ", marsSol=" + marsSol +
+                ", cameraFhaz=" + cameraFhaz +
+                ", cameraRhaz=" + cameraRhaz +
+                ", cameraMast=" + cameraMast +
+                ", cameraChemcam=" + cameraChemcam +
+                ", cameraMahli=" + cameraMahli +
+                ", cameraMardi=" + cameraMardi +
+                ", cameraNavcam=" + cameraNavcam +
+                ", cameraPancam=" + cameraPancam +
+                ", cameraMinites=" + cameraMinites +
+                ", rememberPreferences=" + rememberPreferences +
+                '}';
     }
 }

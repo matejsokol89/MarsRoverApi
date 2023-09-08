@@ -1,8 +1,10 @@
 package com.codecampus.service;
 
 import com.codecampus.dto.HomeDto;
+import com.codecampus.repository.PreferencesRepository;
 import com.codecampus.response.MarsPhoto;
 import com.codecampus.response.MarsRoverApiResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -15,6 +17,8 @@ import java.util.*;
 public class MarsRoverApiService {
     private static final String API_KEY = "fjAoeEym4RzGpucEWUpmBohgNs6GeD2DflXhw0kX";
     private Map<String, List<String>> validCameras = new HashMap<>();
+    @Autowired
+    private PreferencesRepository preferencesRepository;
 
     public MarsRoverApiService() {
         validCameras.put("Opportunity", Arrays.asList("FHAZ", "RHAZ", "NAVCAM", "PANCAM", "MINITES"));
@@ -60,5 +64,14 @@ public class MarsRoverApiService {
     }
     public Map<String, List<String>> getValidCameras() {
         return validCameras;
+    }
+
+    public HomeDto save(HomeDto homeDto) {
+        return preferencesRepository.save(homeDto);
+
+    }
+
+    public HomeDto findByUserid(Long userId) {
+        return preferencesRepository.findByUserId(userId);
     }
 }
